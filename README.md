@@ -1,2 +1,2 @@
 # ScriptureOfTheDay
-'ScriptureOfTheDay' project that automatically selects a random verse from the 'kjv' Linux terminal program for later use on the 'Musimatic.xyz' website.
+Generates a random King James Version of the Bible scripture of the day, and displays it on a webpage by using the 'KJV' command line utility.
