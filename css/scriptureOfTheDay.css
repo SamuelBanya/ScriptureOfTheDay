@@ -1,8 +1,8 @@
-body {
+#content {
+  text-align: center;
   background-color: yellow;
 }
 
-#content {
-  text-align: center;
+body {
   background-color: yellow;
 }
