@@ -245,7 +245,7 @@ def createOutputWebpage(scripture_of_the_day):
         f.write('<br />')
         f.write('<br />')
         f.write('\n')
-        f.write('<h3 class="description_headers">This is a Python 3 program that obtains a random verse from the King James Version of the Bible.</h3>')
+        f.write('<p>This is a Python 3 program that obtains a random verse from the King James Version of the Bible.</p>')
         f.write('<br />')
         f.write('<br />')
         f.write('<h2>Scripture For Today: </h2>')
