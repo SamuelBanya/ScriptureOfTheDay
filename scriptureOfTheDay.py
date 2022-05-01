@@ -241,7 +241,6 @@ def createOutputWebpage(scripture_of_the_day):
         f.write('\n')
         f.write('<h2 id="updated_header">Last Time Updated: ' + str(current_date_eastern) + ' at ' + str(current_time_eastern) + ' EST</h2>')
         f.write('<br />')
-        f.write('<br />')
         f.write('<a class="btn btn-primary" href="https://github.com/SamuelBanya/ScriptureOfTheDay">Source Code Link</a>')
         f.write('<br />')
         f.write('<br />')
