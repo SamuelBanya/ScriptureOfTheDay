@@ -9,6 +9,22 @@ import random
 import os
 import re
 import pendulum
+import shutil
+from dotenv import load_dotenv
+from pathlib import Path
+
+# Global path variables
+load_dotenv()
+env_path = Path('.')/'.env'
+load_dotenv(dotenv_path=env_path)
+WEBSITE_PATH = os.getenv("WEBSITE_PATH")
+print('WEBSITE_PATH: ' + str(WEBSITE_PATH))
+WEBSITE_ADDRESS = os.getenv("WEBSITE_ADDRESS")
+print('WEBSITE_ADDRESS: ' + str(WEBSITE_ADDRESS))
+WEBSITE_FULL_ADDRESS = os.getenv("WEBSITE_FULL_ADDRESS")
+print('WEBSITE_FULL_ADDRESS: ' + str(WEBSITE_FULL_ADDRESS))
+PROJECT_DIRECTORY = os.getenv("PROJECT_DIRECTORY")
+print('PROJECT_DIRECTORY: ' + str(PROJECT_DIRECTORY))
 
 # Remove the "output.txt" file if it already exists to start fresh:
 output_file = 'output.txt'
@@ -83,6 +99,12 @@ book_list = [
     'Jude',
     'Revelation'
 ]
+
+
+def copyOverCSS():
+    css_file_path = str(WEBSITE_PATH + '/css/scriptureOfTheDay.css')
+    print('css_file_path: ' + str(css_file_path))
+    shutil.copyfile(str(PROJECT_DIRECTORY) + '/css/scriptureOfTheDay.css', css_file_path)
 
 
 def obtainBookChoice():
@@ -190,40 +212,34 @@ def obtainScriptureOfTheDay(book_choice, random_verse):
 
 def createOutputWebpage(scripture_of_the_day):
     # TODO: Change to the output directory in the public_html/pythonprojectwebsites
-    content = '<link rel="stylesheet" href="css/output.css" type="text/css"/>'
-    
+    content = '<html>'
+    content += '<head>'
+    content += '<link rel="stylesheet" href="css/scriptureOfTheDay.css" type="text/css"/>'
+    content += '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">'
+    content += '<title>Scripture Of The Day</title>'
+    content += '<meta charset="utf-8"/>'    
+    content += '</head>'
+    content += '<body>'
+    content += '<div id="content">'
     content += '<h1 id="program_header">Scripture Of The Day</h1>'
-
     content += '\n'
-
     current_date_eastern = pendulum.now('America/New_York').format('dddd, MMMM D, YYYY')
-
     current_time_eastern = pendulum.now('America/New_York').format('hh:mm:ss A')
-
     content += '<h2 id="updated_header">Last Time Updated: ' + str(current_date_eastern) + ' at ' + str(current_time_eastern) + ' EST</h2>'
-
     content += '<br />'
-    
-    content += '<a href="http://www.musimatic.xyz">BACK TO HOMEPAGE</a>'
-    
+    content += '<a class="btn btn-primary" href="http://www.musimatic.xyz">BACK TO HOMEPAGE</a>'
     content += '<br />'
-
     content += '<br />'
-    
-    content += '<a href="https://git.musimatic.xyz/ScriptureOfTheDay/tree/">Source Code Link</a>'
-    
+    content += '<a class="btn btn-primary" href="https://github.com/SamuelBanya/ScriptureOfTheDay">Source Code Link</a>'
     content += '<br />'
-
     content += '<br />'    
-
     content += '\n'
-
     content += '<h2 class="description_headers">This is a program that obtains a random verse from the King James Version of the Bible.</h2>'
-
     content += '<h3>Scripture For Today: </h3>'
-
     content += '<p>' + scripture_of_the_day + '</p>'
-
+    content += '</div>'
+    content += '</body>'
+    content = '</html>'
     print('content: %s' %(content))
 
     with open('/var/www/musimatic/pythonprojectwebsites/ScriptureOfTheDay/output.html', 'w') as f:
@@ -233,6 +249,7 @@ def createOutputWebpage(scripture_of_the_day):
 
     
 def main():
+    copyOverCSS()
     book_choice = obtainBookChoice()
     scripture_file = runSystemCommand(book_choice)
     verse_list = obtainVerseList(scripture_file)
