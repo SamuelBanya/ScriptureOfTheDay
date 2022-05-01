@@ -1,8 +1,6 @@
 #content {
   text-align: center;
   background-color: yellow;
+  min-height: 100vh;  
 }
 
-body {
-  background-color: unset;
-}
