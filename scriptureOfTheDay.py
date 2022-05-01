@@ -211,40 +211,35 @@ def obtainScriptureOfTheDay(book_choice, random_verse):
 
 
 def createOutputWebpage(scripture_of_the_day):
-    # TODO: Change to the output directory in the public_html/pythonprojectwebsites
-    content = '<html>'
-    content += '<head>'
-    content += '<link rel="stylesheet" href="css/scriptureOfTheDay.css" type="text/css"/>'
-    content += '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">'
-    content += '<title>Scripture Of The Day</title>'
-    content += '<meta charset="utf-8"/>'    
-    content += '</head>'
-    content += '<body>'
-    content += '<div id="content">'
-    content += '<h1 id="program_header">Scripture Of The Day</h1>'
-    content += '\n'
     current_date_eastern = pendulum.now('America/New_York').format('dddd, MMMM D, YYYY')
     current_time_eastern = pendulum.now('America/New_York').format('hh:mm:ss A')
-    content += '<h2 id="updated_header">Last Time Updated: ' + str(current_date_eastern) + ' at ' + str(current_time_eastern) + ' EST</h2>'
-    content += '<br />'
-    content += '<a class="btn btn-primary" href="http://www.musimatic.xyz">BACK TO HOMEPAGE</a>'
-    content += '<br />'
-    content += '<br />'
-    content += '<a class="btn btn-primary" href="https://github.com/SamuelBanya/ScriptureOfTheDay">Source Code Link</a>'
-    content += '<br />'
-    content += '<br />'    
-    content += '\n'
-    content += '<h2 class="description_headers">This is a program that obtains a random verse from the King James Version of the Bible.</h2>'
-    content += '<h3>Scripture For Today: </h3>'
-    content += '<p>' + scripture_of_the_day + '</p>'
-    content += '</div>'
-    content += '</body>'
-    content = '</html>'
-    print('content: %s' %(content))
-
     with open('/var/www/musimatic/pythonprojectwebsites/ScriptureOfTheDay/output.html', 'w') as f:
-        f.write(content)
-
+        f.write('<html>')
+        f.write('<head>')
+        f.write('<link rel="stylesheet" href="css/scriptureOfTheDay.css" type="text/css"/>')
+        f.write('<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">')
+        f.write('<title>Scripture Of The Day</title>')
+        f.write('<meta charset="utf-8"/>')
+        f.write('</head>')
+        f.write('<body>')
+        f.write('<div id="content">')
+        f.write('<h1 id="program_header">Scripture Of The Day</h1>')
+        f.write('\n')
+        f.write('<h2 id="updated_header">Last Time Updated: ' + str(current_date_eastern) + ' at ' + str(current_time_eastern) + ' EST</h2>')
+        f.write('<br />')
+        f.write('<a class="btn btn-primary" href="http://www.musimatic.xyz">BACK TO HOMEPAGE</a>')
+        f.write('<br />')
+        f.write('<br />')
+        f.write('<a class="btn btn-primary" href="https://github.com/SamuelBanya/ScriptureOfTheDay">Source Code Link</a>')
+        f.write('<br />')
+        f.write('<br />')
+        f.write('\n')
+        f.write('<h2 class="description_headers">This is a program that obtains a random verse from the King James Version of the Bible.</h2>')
+        f.write('<h3>Scripture For Today: </h3>')
+        f.write('<p>' + scripture_of_the_day + '</p>')
+        f.write('</div>')
+        f.write('</body>')
+        f.write('</html>')
     f.close()
 
     
