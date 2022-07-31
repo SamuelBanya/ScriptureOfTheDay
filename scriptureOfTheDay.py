@@ -174,12 +174,12 @@ def obtainRandomVerse(verse_list):
 
 def obtainScriptureOfTheDay(book_choice, random_verse):
     os.chdir('/tmp/')
-    scripture_text_file = 'scripture.txt'    
+    scripture_text_file = 'scripture.txt'
     # Remove the scripture_text_file so that there's a fresh new
     # file each time it is run:
     if os.path.isfile(scripture_text_file):
-        os.remove(scripture_text_file)    
-    
+        os.remove(scripture_text_file)
+
     scripture_choice = str(book_choice + ' ' + random_verse)
     # print('scripture_of_the_day: %s' %(scripture_of_the_day))
 
@@ -187,7 +187,7 @@ def obtainScriptureOfTheDay(book_choice, random_verse):
     cd_command = 'cd /tmp'
 
     os.system(cd_command)
-    
+
     system_command = str('./kjv ' + scripture_choice + ' >> scripture.txt')
 
     os.system(system_command)
@@ -206,14 +206,14 @@ def obtainScriptureOfTheDay(book_choice, random_verse):
             scripture_of_the_day += line
 
     # print('scripture_of_the_day: \n\n%s' %(scripture_of_the_day))
-            
+
     return scripture_of_the_day
 
 
 def createOutputWebpage(scripture_of_the_day):
     current_date_eastern = pendulum.now('America/New_York').format('dddd, MMMM D, YYYY')
     current_time_eastern = pendulum.now('America/New_York').format('hh:mm:ss A')
-    with open('/var/www/musimatic/pythonprojectwebsites/ScriptureOfTheDay/output.html', 'w') as f:
+    with open('/var/www/apps/pythonprojectwebsites/ScriptureOfTheDay/output.html', 'w') as f:
         f.write('<html>')
         f.write('<head>')
         f.write('<link rel="stylesheet" href="css/scriptureOfTheDay.css" type="text/css"/>')
@@ -236,7 +236,7 @@ def createOutputWebpage(scripture_of_the_day):
         f.write('</li>')
         f.write('</div>')
         f.write('</div>')
-        f.write('</nav>')        
+        f.write('</nav>')
         f.write('<h1 id="program_header">Scripture Of The Day</h1>')
         f.write('\n')
         f.write('<h2 id="updated_header">Last Time Updated: ' + str(current_date_eastern) + ' at ' + str(current_time_eastern) + ' EST</h2>')
@@ -255,7 +255,7 @@ def createOutputWebpage(scripture_of_the_day):
         f.write('</html>')
     f.close()
 
-    
+
 def main():
     copyOverCSS()
     book_choice = obtainBookChoice()
